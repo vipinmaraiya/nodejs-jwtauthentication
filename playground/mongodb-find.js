@@ -50,5 +50,31 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err, db)=>{
     //     console.log(result);
     // });
 
+    //findOneAndUpdate
+    // db.collection("Users").findOneAndUpdate({
+    //     _id:new ObjectID("5aa82199a64e1b06ec71146e")
+    // },{
+    //     name:"Vipin"
+    // },{
+    //     returnOriginal:false
+    // }).then((result)=>{
+    //     console.log(result);
+    // })
+
+    db.collection("Users").findOneAndUpdate({
+        _id:new ObjectID("5aa82199a64e1b06ec71146e")
+    },{
+        $set:{
+            name:"Vipin2"
+        },
+        $inc:{
+            age:2
+        }
+    },{
+        returnOriginal:false
+    }).then((result)=>{
+        console.log(result);
+    })
+
     db.close();
 });
