@@ -7,11 +7,11 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err, db)=>{
     }
     console.log('Connected to MongoDB server');
 
-    db.collection("Users").find({
-        _id: new ObjectID('5aa81fb43484c61164e642ad')
-    }).toArray().then((docs)=>{
-        console.log(docs);
-    });
+    // db.collection("Users").find({
+    //     _id: new ObjectID('5aa81fb43484c61164e642ad')
+    // }).toArray().then((docs)=>{
+    //     console.log(docs);
+    // });
 
     // db.collection("Users").find({
     //     location:"Agra"
@@ -20,6 +20,12 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err, db)=>{
     // }, (err)=>{
     //     console.log('Unable to fetch Users', err);
     // });
+
+    db.collection("Users").find({
+        name:"Vipin"
+    }).toArray().then((result)=>{
+        console.log(result);
+    })
 
     db.close();
 });
