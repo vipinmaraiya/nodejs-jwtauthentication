@@ -21,11 +21,34 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err, db)=>{
     //     console.log('Unable to fetch Users', err);
     // });
 
-    db.collection("Users").find({
-        name:"Vipin"
-    }).toArray().then((result)=>{
-        console.log(result);
-    })
+    // db.collection("Users").find({
+    //     name:"Vipin"
+    // }).toArray().then((result)=>{
+    //     console.log(result);
+    // })
+
+
+    //deleteMany
+    // db.collection("Users").deleteMany({
+    //     name:"Vipin"
+    // }).then((result)=>{
+    //     console.log(result);
+    // })
+
+
+    //deleteone
+    // db.collection("Users").deleteOne({
+    //     name:"Vipin"
+    // }).then((result)=>{
+    //     console.log(result);
+    // })
+
+    //findoneanddelete
+    // db.collection("Users").findOneAndDelete({
+    //     name:"ZVipin2"
+    // }).then((result)=>{
+    //     console.log(result);
+    // });
 
     db.close();
 });
