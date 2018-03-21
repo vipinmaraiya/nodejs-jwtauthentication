@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {ObjectID} = require("mongodb");
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
@@ -44,11 +45,30 @@ UserSchema.methods.generateAuthToken = function () {
   var access = 'auth';
   var token = jwt.sign({_id: user._id.toHexString(), access}, 'abc123').toString();
 
-  user.tokens.concat([{access, token}]);
+  user.tokens = user.tokens.concat([{access, token}]);
+
   return user.save().then(() => {
     return token;
   });
 };
+
+UserSchema.statics.findByToken = function(token) {
+  let User =this;
+  let decoded;
+  try{
+    decoded = jwt.verify(token, "abc123");
+  }
+  catch(err){
+    return Promise.reject();
+  }
+
+  return User.find({
+    _id:decoded._id,
+    'tokens.access':'auth',
+    'tokens.token':token
+  })
+
+}
 
 var User = mongoose.model('User', UserSchema);
 
